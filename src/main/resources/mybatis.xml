@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+    环境配置：数据库的连接信息
+    default：必须和某个environment id的值一样
+    告诉mybatis使用的是哪个数据库的连接信息。
+    -->
+    <environments default="dev">
+        <environment id="dev">
+            <!--
+            transactionManager：mybatis事务的类型
+                type="JDBC"（表示使用jdbc中的connection对象的commit，rollback）
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+            dataSource:表示数据源，连接数据库的
+                type="POOLED"表示数据源的类型，POOLED表示用的连接池
+            -->
+            <dataSource type="POOLED">
+                <!--
+                drive,user,username,password是固定的，不能自定义
+                -->
+                <!--数据库驱动名称-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <!--数据库的url字符串-->
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC"/>
+                <!--用户名-->
+                <property name="username" value="root"/>
+                <!--密码-->
+                <property name="password" value="111111"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/zzjm/dao/StudentDao.xml"/>
+    </mappers>
+</configuration>
+<!--
+    mybatis主配置文件：主要定义数据库的配置信息，sql的映射文件我i之
+    1.约束文件
+    <!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        mybatis-3-config.dtd约束文件的名称
+        2.configuration 跟标签
+-->
