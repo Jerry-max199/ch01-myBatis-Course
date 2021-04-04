@@ -8,4 +8,6 @@ import java.util.List;
 public interface StudentDao {
     //查询表中所有信息
     public List<Student> selectStudents();
+    //插入数据
+    public int insert(Student student);
 }

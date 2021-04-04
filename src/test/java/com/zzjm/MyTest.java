@@ -37,5 +37,23 @@ public class MyTest {
         //关闭sqlSession对象
         sqlSession.close();
         }
+        @Test
+    public void insertStudent() throws IOException {
+       String config="mybatis.xml";
+       InputStream inputStream=Resources.getResourceAsStream(config);
+       SqlSessionFactoryBuilder sqlSessionFactoryBuilder=new SqlSessionFactoryBuilder();
+       SqlSessionFactory sqlSessionFactory=sqlSessionFactoryBuilder.build(inputStream);
+       SqlSession sqlSession=sqlSessionFactory.openSession();
+       String insertsql="com.zzjm.dao.StudentDao"+"."+"insertStudents";
+       Student student=new Student();
+       student.setId(1005);
+       student.setName("关羽");
+       student.setEmail("guanyu@163.com");
+       student.setAge(50);
+      int numbers= sqlSession.insert(insertsql,student);
+      sqlSession.commit();
+        System.out.println("插入数据数量"+numbers);
+        sqlSession.close();
+    }
     }
 
