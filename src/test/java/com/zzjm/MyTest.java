@@ -1,6 +1,7 @@
 package com.zzjm;
 
 
+import com.zzjm.Utils.Myutil;
 import com.zzjm.domain.Student;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -53,6 +54,29 @@ public class MyTest {
       int numbers= sqlSession.insert(insertsql,student);
       sqlSession.commit();
         System.out.println("插入数据数量"+numbers);
+        sqlSession.close();
+    }
+    @Test
+    public void selectStudentUtil(){
+        SqlSession sqlSession=Myutil.getSqlSession();
+        String selectStudent="com.zzjm.dao.StudentDao"+"."+"selectStudents";
+       List<Student> studentList=sqlSession.selectList(selectStudent);
+    for (Student student:studentList){
+        System.out.println(student);
+    }
+    sqlSession.close();
+    }
+    @Test
+    public void insertStudentUtil(){
+        SqlSession sqlSession=Myutil.getSqlSession();
+        String insertStudent="com.zzjm.dao.StudentDao"+"."+"insertStudents";
+        Student student=new Student();
+        student.setId(1005);
+        student.setName("诸葛亮");
+        student.setEmail("zhugeliang@163.com");
+        student.setAge(60);
+        int numbers=sqlSession.insert(insertStudent,student);
+        System.out.println("提交数据的数量"+numbers);
         sqlSession.close();
     }
     }
